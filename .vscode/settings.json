@@ -1,0 +1,4 @@
+{
+    // Configures which processes to automatically attach and debug when `debug.node.autoAttach` is on.
+    "debug.javascript.autoAttachFilter": "onlyWithFlag",
+}
