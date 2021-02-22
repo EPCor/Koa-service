@@ -1,3 +1,3 @@
-import app from '@/app';
+const app = require('@/app');
 
 console.log(process.pid, app.env);

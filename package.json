@@ -1,14 +1,14 @@
 {
-  "name": "esm-service",
+  "name": "koa-service",
   "version": "1.0.0",
   "main": "index.js",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "build": "babel src -d dist -x .cjs,.js --keep-file-extension -D",
     "build:watch": "npm run build -- -w -s",
-    "start": "pm2 start ecosystem.config.cjs --only service-dev",
-    "debug": "pm2 start ecosystem.config.cjs --only service-debug",
-    "server": "pm2 start ecosystem.config.cjs --only service",
+    "start": "pm2 start ecosystem.config.js --only service-dev",
+    "debug": "pm2 start ecosystem.config.js --only service-debug",
+    "server": "pm2 start ecosystem.config.js --only service",
     "lint": "eslint . --ext .js,.cjs,.mjs",
     "test": "mocha"
   },
@@ -22,6 +22,7 @@
     "@babel/cli": "^7.12.13",
     "@babel/core": "^7.12.13",
     "@babel/eslint-parser": "^7.12.13",
+    "@babel/node": "^7.12.17",
     "@babel/plugin-syntax-top-level-await": "^7.12.13",
     "@babel/plugin-transform-runtime": "^7.12.15",
     "@babel/preset-env": "^7.12.13",

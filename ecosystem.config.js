@@ -1,11 +1,11 @@
-const common = {
+const commonConfig = {
   name: 'service',
-  script: './dist/index.js',
+  script: 'dist',
   node_args: ['--es-module-specifier-resolution=node'],
   instances: 'max',
   max_memory_restart: '512M',
   autorestart: true,
-  max_restarts: 10,
+  max_restarts: 3,
   watch: true,
   ignore_watch: ['node_modules', '.vscode', 'logs', 'docs'],
   merge_logs: true,
@@ -21,22 +21,28 @@ const common = {
     port: 8088,
   },
 };
+const devConfig = {
+  script: 'src',
+  exec_interpreter: 'babel-node',
+  exec_mode: 'fork_mode',
+  instances: 1,
+};
 
 module.exports = {
   apps: [
     {
-      ...common,
+      ...commonConfig,
+      ...devConfig,
       name: 'service-dev',
-      instances: 1,
     },
     {
-      ...common,
+      ...commonConfig,
+      ...devConfig,
       name: 'service-debug',
       node_args: ['--inspect', '--es-module-specifier-resolution=node'],
-      instances: 1,
     },
     {
-      ...common,
+      ...commonConfig,
       name: 'service',
     },
   ],
