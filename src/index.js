@@ -1,3 +1,3 @@
 import app from '@/app';
 
-console.log(process.pid, app.env);
+console.log(`Start with ${app.env} environment at pid ${process.pid}`);
