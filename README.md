@@ -8,6 +8,9 @@
 ## Start
 
 ```sh
+# Install Dependencies
+npm i
+
 # Development
 npm run start # npm run debug
 
