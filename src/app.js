@@ -1,11 +1,25 @@
 import Koa from 'koa';
-const app = new Koa();
-const port = process.port || 8088;
+import logger from 'koa-logger';
+import session from 'koa-session';
+import koaStatic from 'koa-static';
+import bodyParser from 'koa-bodyparser';
+import { catchError, onError } from '@/middleware/error';
+import router from '@/routes';
+import { validateJWT } from '@/lib/jwt';
+import { SESSION_CONFIG } from '@/lib/constants';
 
-app.use(ctx => {
-  ctx.body = 'Hello World!';
-});
+const { port = 8088, secret } = process.env;
+const app = new Koa({ keys: [secret] });
 
+app.use(catchError());
+app.use(logger());
+app.use(koaStatic('./public/'));
+app.use(session(SESSION_CONFIG, app));
+app.use(validateJWT());
+app.use(bodyParser());
+app.use(router.routes());
+
+app.on('error', onError);
 app.listen(port, () => console.log(`Start on port ${port}`));
 
 export default app;

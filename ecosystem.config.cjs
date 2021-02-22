@@ -14,11 +14,11 @@ const common = {
   log_date_format: 'YYYY-MM-DD HH:mm:ss Z',
   env: {
     NODE_ENV: 'development',
-    port: 8088,
+    ...require('./config/env'),
   },
   env_production: {
     NODE_ENV: 'production',
-    port: 8088,
+    ...require('./config/env'),
   },
 };
 
