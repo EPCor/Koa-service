@@ -4,7 +4,6 @@
 
 ```sh
 # Development
-npm run build:watch
 npm run start # npm run debug
 
 # Production
