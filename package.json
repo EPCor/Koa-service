@@ -1,7 +1,7 @@
 {
   "name": "esm-service",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src",
   "type": "module",
   "scripts": {
     "build": "babel src -d dist -x .cjs,.js --keep-file-extension -D",
@@ -10,11 +10,9 @@
     "debug": "pm2 start ecosystem.config.cjs --only service-debug",
     "server": "pm2 start ecosystem.config.cjs --only service",
     "lint": "eslint . --ext .js,.cjs,.mjs",
+    "lint:fix": "npm run eslint -- --fix",
     "test": "mocha"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "@babel/runtime": "^7.12.18",
     "core-js": "^3.9.0",
@@ -32,7 +30,31 @@
     "eslint": "^7.20.0",
     "eslint-config-prettier": "^8.0.0",
     "eslint-plugin-prettier": "^3.3.1",
+    "husky": "^5.1.0",
     "prettier": "^2.2.1"
   },
-  "description": ""
+  "config": {},
+  "description": "",
+  "keywords": [],
+  "author": "zhilidali@qq.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EPCor/Koa-service.git"
+  },
+  "homepage": "https://github.com/EPCor/Koa-service#readme",
+  "bugs": {
+    "url": "https://github.com/EPCor/Koa-service/issues"
+  },
+  "license": "MIT",
+  "directories": {
+    "doc": "docs",
+    "bin": "bin",
+    "test": "test",
+    "man": "src"
+  },
+  "engines": {
+    "node": ">= v14.15.4",
+    "vscode": "^1.52.1",
+    "Git": ">= 2.13.0"
+  }
 }
