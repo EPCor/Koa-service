@@ -1,5 +1,10 @@
 # Koa service
 
+## Requirements
+
+* node: `>=v14.15.4`
+* pm2: `$ npm i -g pm2`
+
 ## Start
 
 ```sh
@@ -10,3 +15,7 @@ npm run start # npm run debug
 npm run build
 npm run server
 ```
+
+## License
+
+[MIT License](/LICENSE)
