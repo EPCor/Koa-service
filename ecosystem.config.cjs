@@ -1,3 +1,4 @@
+const envConfigs = require('dotenv').config().parsed;
 const common = {
   name: 'service',
   script: './dist/index.js',
@@ -14,13 +15,15 @@ const common = {
   log_date_format: 'YYYY-MM-DD HH:mm:ss Z',
   env: {
     NODE_ENV: 'development',
-    ...require('./config/env'),
+    ...envConfigs,
   },
   env_production: {
     NODE_ENV: 'production',
-    ...require('./config/env'),
+    ...envConfigs,
   },
 };
+
+console.log(envConfigs);
 
 module.exports = {
   apps: [

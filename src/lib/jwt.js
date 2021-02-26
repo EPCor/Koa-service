@@ -1,7 +1,8 @@
 import jwt from 'jsonwebtoken';
 import koaJwt from 'koa-jwt';
+import config from '@/config';
 
-const { secret } = process.env;
+const { secret } = config;
 
 export function sign(data) {
   return jwt.sign(data, secret, { expiresIn: '7d' });

@@ -6,9 +6,9 @@ import bodyParser from 'koa-bodyparser';
 import { catchError, onError } from '@/middleware/error';
 import router from '@/routes';
 import { validateJWT } from '@/lib/jwt';
-import { SESSION_CONFIG } from '@/lib/constants';
+import config, { SESSION_CONFIG } from '@/config';
 
-const { port = 8088, secret } = process.env;
+const { port, secret } = config;
 const app = new Koa({ keys: [secret] });
 
 app.use(catchError());
@@ -18,7 +18,6 @@ app.use(session(SESSION_CONFIG, app));
 app.use(validateJWT());
 app.use(bodyParser());
 app.use(router.routes());
-
 app.on('error', onError);
 app.listen(port, () => console.log(`Start on port ${port}`));
 
