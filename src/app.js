@@ -1,7 +1,8 @@
 const Koa = require('koa');
+const config = require('@/config');
 
 const app = new Koa();
-const port = process.port || 8088;
+const { port } = config;
 
 app.use(ctx => {
   ctx.body = 'Hello World!';
