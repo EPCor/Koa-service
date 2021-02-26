@@ -1,3 +1,4 @@
+const envConfigs = require('dotenv').config().parsed;
 const common = {
   name: 'service',
   script: './dist/index.js',
@@ -14,13 +15,15 @@ const common = {
   log_date_format: 'YYYY-MM-DD HH:mm:ss Z',
   env: {
     NODE_ENV: 'development',
-    port: 8088,
+    ...envConfigs,
   },
   env_production: {
     NODE_ENV: 'production',
-    port: 8088,
+    ...envConfigs,
   },
 };
+
+console.log(envConfigs);
 
 module.exports = {
   apps: [
