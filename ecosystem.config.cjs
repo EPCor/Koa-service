@@ -1,14 +1,14 @@
 const envConfigs = require('dotenv').config().parsed;
+const { inspect } = process.env;
 const common = {
-  name: 'service',
   script: './dist/index.js',
   node_args: ['--es-module-specifier-resolution=node'],
   instances: 'max',
   max_memory_restart: '512M',
   autorestart: true,
   max_restarts: 10,
-  watch: true,
-  ignore_watch: ['node_modules', '.vscode', 'logs', 'docs'],
+  watch: ['dist'], // true
+  // ignore_watch: ['node_modules', '.vscode', 'logs', 'docs'],
   merge_logs: true,
   error_file: './logs/err.log',
   out_file: './logs/out.log',
@@ -30,12 +30,9 @@ module.exports = {
     {
       ...common,
       name: 'service-dev',
-      instances: 1,
-    },
-    {
-      ...common,
-      name: 'service-debug',
-      node_args: ['--inspect', '--es-module-specifier-resolution=node'],
+      node_args: inspect
+        ? ['--inspect', ...common.node_args]
+        : common.node_args,
       instances: 1,
     },
     {
