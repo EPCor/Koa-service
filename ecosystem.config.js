@@ -1,14 +1,10 @@
 const envConfigs = require('dotenv').config().parsed;
 const commonConfig = {
-  name: 'service',
-  script: 'dist',
   node_args: ['--es-module-specifier-resolution=node'],
   instances: 'max',
   max_memory_restart: '512M',
   autorestart: true,
   max_restarts: 3,
-  watch: true,
-  ignore_watch: ['node_modules', '.vscode', 'logs', 'docs'],
   merge_logs: true,
   error_file: './logs/err.log',
   out_file: './logs/out.log',
@@ -22,12 +18,6 @@ const commonConfig = {
     ...envConfigs,
   },
 };
-const devConfig = {
-  script: 'src',
-  exec_interpreter: 'babel-node',
-  exec_mode: 'fork_mode',
-  instances: 1,
-};
 
 console.log(envConfigs);
 
@@ -35,18 +25,21 @@ module.exports = {
   apps: [
     {
       ...commonConfig,
-      ...devConfig,
       name: 'service-dev',
-    },
-    {
-      ...commonConfig,
-      ...devConfig,
-      name: 'service-debug',
-      node_args: ['--inspect', '--es-module-specifier-resolution=node'],
+      script: 'src',
+      watch: ['src'],
+      exec_interpreter: './node_modules/.bin/babel-node',
+      node_args: process.env.inspect
+        ? ['--inspect', ...commonConfig.node_args]
+        : commonConfig.node_args,
+      exec_mode: 'fork_mode',
+      instances: 1,
     },
     {
       ...commonConfig,
       name: 'service',
+      script: 'dist',
+      watch: ['dist'],
     },
   ],
 };
