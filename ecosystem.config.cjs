@@ -20,32 +20,39 @@ const commonConfigs = {
     ...envConfigs,
   },
 };
-const devConfigs = {
-  node_args: commonConfigs.node_args,
-  instances: 1,
-};
+const dynamicConfigs = {};
 const { inspect, loadBabel } = process.env;
 
-if (inspect) devConfigs.node_args.push('--inspect');
+if (inspect) {
+  dynamicConfigs.node_args = (
+    dynamicConfigs.node_args || commonConfigs.node_args
+  ).concat('--inspect');
+}
 if (loadBabel) {
-  devConfigs.node_args.push('--experimental-loader=@node-loader/babel');
-  Object.assign(devConfigs, {
+  Object.assign(dynamicConfigs, {
+    node_args: (dynamicConfigs.node_args || commonConfigs.node_args).concat(
+      '--experimental-loader=@node-loader/babel'
+    ),
     script: 'src',
     watch: ['src'],
   });
 }
+
+console.log(dynamicConfigs);
 console.log(envConfigs);
 
 module.exports = {
   apps: [
     {
       ...commonConfigs,
-      ...devConfigs,
       name: 'service-dev',
+      instances: 1,
+      ...dynamicConfigs,
     },
     {
       ...commonConfigs,
       name: 'service',
+      ...dynamicConfigs,
     },
   ],
 };
