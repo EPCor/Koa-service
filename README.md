@@ -1,6 +1,8 @@
-# Koa service
+# Koa Engineering Configuration
 
-This project uses ES module by default, if you want to use CommonJs module you can switch to the `cjs` branch.
+A boilerplate for Koa Web application
+
+This default `master` branch uses ES module, if you want to use CommonJs module you can switch to the `cjs` branch.`
 
 * Framework: `koa`
 * Process manager: `pm2`
@@ -20,13 +22,21 @@ You can create a `.env` file containing environment variables in the root direct
 npm i
 
 # Development
-npm run build:watch
-npm run start # npm run debug
+npm run start
+npm run debug
 
 # Production
 npm run build
 npm run server
 ```
+
+## Features
+
+* use ES module
+* Framework: `koa`
+* Process manager: `pm2`
+* Transpiler: `babel`
+* Linter: `eslint`, `perttier`
 
 ## License
 
