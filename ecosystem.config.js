@@ -1,5 +1,5 @@
 const envConfigs = require('dotenv').config().parsed;
-const commonConfig = {
+const commonConfigs = {
   node_args: ['--es-module-specifier-resolution=node'],
   instances: 'max',
   max_memory_restart: '512M',
@@ -24,19 +24,19 @@ console.log(envConfigs);
 module.exports = {
   apps: [
     {
-      ...commonConfig,
+      ...commonConfigs,
       name: 'service-dev',
       script: 'src',
       watch: ['src'],
       exec_interpreter: './node_modules/.bin/babel-node',
       node_args: process.env.inspect
-        ? ['--inspect', ...commonConfig.node_args]
-        : commonConfig.node_args,
+        ? ['--inspect', ...commonConfigs.node_args]
+        : commonConfigs.node_args,
       exec_mode: 'fork_mode',
       instances: 1,
     },
     {
-      ...commonConfig,
+      ...commonConfigs,
       name: 'service',
       script: 'dist',
       watch: ['dist'],
