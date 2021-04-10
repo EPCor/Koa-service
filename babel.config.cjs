@@ -1,4 +1,5 @@
 module.exports = {
+  sourceMaps: process.env.inspect ? 'inline' : false,
   presets: [
     [
       '@babel/preset-env',
